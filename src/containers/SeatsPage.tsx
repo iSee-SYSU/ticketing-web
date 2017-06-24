@@ -69,6 +69,7 @@ class SeatsPage extends React.Component<SeatsPageProps, any> {
       seats: this.state.selectedSeats,
       movieDetail: this.props.movieDetail,
       showInfo: this.props.showInfo,
+      seatsInfo: this.props.seatsInfo,
       movieId: this.props.mid,
       cinemaId: this.props.cid,
       showId: this.props.sid,
