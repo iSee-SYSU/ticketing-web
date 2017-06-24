@@ -37,9 +37,11 @@ function* loadMovieList() {
  */
 function* loadMovieDetail(id: number) {
   const data = yield select(selectors.getMovieDetail);
-  const movieDetailAction = actions.movieDetail;
-  const getMovieDetail = getData.bind(null, movieDetailAction, api.getMovieDetail);
-  yield call(getMovieDetail, 'movieDetail', { id });
+  if (!data || data.detail.id != id) {
+    const movieDetailAction = actions.movieDetail;
+    const getMovieDetail = getData.bind(null, movieDetailAction, api.getMovieDetail);
+    yield call(getMovieDetail, 'movieDetail', { id });
+  }
 }
 
 /**
@@ -78,7 +80,15 @@ function* loadShowInfo(mid: number, cid: number) {
   yield call(getShowInfo, 'showInfo', { mid, cid });
 }
 
-
+/**
+ * 场次座位
+ */
+function* loadSeatsInfo(sid: number, sdate: string) {
+  const data = yield select(selectors.getSeatsInfo);
+  const seatsInfoAction = actions.seatsInfo;
+  const getSeatsInfo = getData.bind(null, seatsInfoAction, api.getSeatsInfo);
+  yield call(getSeatsInfo, 'seatsInfo', { sid, sdate });
+}
 
 /******************************* WATCHERS *************************************/
 
@@ -119,13 +129,21 @@ function* watchLoadShowInfo() {
   }
 }
 
+function* watchLoadSeatsInfo() {
+  while(true) {
+    const { sid, sdate } = yield take(actions.LOAD_SEATS_INFO);
+    yield fork(loadSeatsInfo, sid, sdate);
+  }
+}
+
 export default function* root() {
   yield [
     fork(watchLoadMovieList),
     fork(watchLoadMovieDetail),
     fork(watchLoadAreaList),
     fork(watchLoadCinemaList),
-    fork(watchLoadShowInfo)
+    fork(watchLoadShowInfo),
+    fork(watchLoadSeatsInfo)
   ]
 }
 

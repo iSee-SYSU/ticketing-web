@@ -7,3 +7,5 @@ export const getAreaList = (state) => state.data.areaList;
 export const getCinemaList = (state) => state.data.cinemaList;
 
 export const getShowInfo = (state) => state.data.showInfo;
+
+export const getSeatsInfo = (state) => state.data.seatsInfo;

@@ -1,49 +1,74 @@
 import { connect } from 'react-redux';
 import { goBack, push } from 'react-router-redux';
 import { NavBar } from 'antd-mobile';
-import { loadMovieDetail } from '../actions';
+import { loadMovieDetail, loadShowInfo, loadCinemaList, loadSeatsInfo } from '../actions';
 
 import * as React from 'react';
-import '../components/cinema/styles/index.sass';
+import '../components/seats/styles/index.sass';
 
 export interface SeatsPageProps {
   goBack: Function,
   loadMovieDetail: Function,
+  loadShowInfo: Function,
+  loadCinemaList: Function,
+  loadSeatsInfo: Function,
   movieDetail: any,
+  showInfo: any,
+  cinemaList: any,
+  seatsInfo: Array<any>,
   mid: number,
+  cid: number,
+  sid: number,
+  sdate: string,
 }
 
 class SeatsPage extends React.Component<SeatsPageProps, any> {
 
   componentDidMount() {
     this.props.loadMovieDetail(this.props.mid);
+    this.props.loadCinemaList();
+    // this.props.loadShowInfo(this.props.mid, this.props.cid);
+    this.props.loadSeatsInfo(this.props.sid, this.props.sdate);
+  }
+
+  getCinemaById(cinemaList: Array<any>, cid: number) {
+    if (cinemaList.length > 0) {
+      for (let i = 0; i < cinemaList.length; ++i) {
+        if (cinemaList[i].id == cid) {
+          return cinemaList[i];
+        }
+      }
+    } else {
+      return null;
+    }
   }
 
   render() {
-    const { movieDetail } = this.props;
+    const { movieDetail, showInfo, cinemaList, seatsInfo, mid, cid, sid, sdate } = this.props;
+    const cinema = this.getCinemaById(cinemaList, cid);
     return (
       <div id="seats-page">
-        <NavBar iconName="left" onLeftClick={() => this.props.goBack()}></NavBar>
+        <NavBar iconName="left" onLeftClick={() => this.props.goBack()}>{ cinema ? cinema.nm : ""}</NavBar>
         <div className="movie">
           <button className="btn btn-pay">提交订单</button>
           <div className="info">
-            <h3>月亮</h3>
-            <p>2016-01-01</p>
+            <h3>{ movieDetail ? movieDetail.detail.nm : "" }</h3>
+            <p>{ sdate }</p>
           </div>
         </div>
         <div className="tips">
           <ul className="seat-intro">
             <li>
-              <span className="seat active">可选</span>
+              <span className="seat active"></span>可选
             </li>
             <li>
-              <span className="seat selected">已选</span>
+              <span className="seat selected"></span>已选
             </li>
             <li>
-              <span className="seat disabled">已售</span>
+              <span className="seat disabled"></span>已售
             </li>
             <li>
-              <span className="seat love">情侣座</span>
+              <span className="seat love"></span>情侣座
             </li>
           </ul>
         </div>
@@ -56,13 +81,19 @@ class SeatsPage extends React.Component<SeatsPageProps, any> {
 function mapStateToProps(state, ownProps) {
 
   const {
-    data: { movieDetail }
+    data: { movieDetail, showInfo, cinemaList, seatsInfo }
   } = state
 
   return {
     movieDetail,
-    mid: ownProps.match.params.movieId
+    showInfo,
+    cinemaList,
+    seatsInfo,
+    mid: ownProps.match.params.movieId,
+    cid: ownProps.match.params.cinemaId,
+    sid: ownProps.match.params.showId,
+    sdate: ownProps.match.params.showDate
   }
 }
 
-export default connect(mapStateToProps, { loadMovieDetail, goBack, push })(SeatsPage);
+export default connect(mapStateToProps, { loadMovieDetail, loadShowInfo, loadCinemaList, loadSeatsInfo, goBack, push })(SeatsPage);

@@ -43,8 +43,8 @@ class ShowPage extends React.Component<ShowPageProps, any> {
   }
 
   render() {
-    const { movieDetail, showInfo, cinemaList } = this.props;
-    const cinema = this.getCinemaById(cinemaList, this.props.cid);
+    const { movieDetail, showInfo, cinemaList, mid, cid } = this.props;
+    const cinema = this.getCinemaById(cinemaList, cid);
     
     return (
       <div id="show-page">
@@ -54,7 +54,7 @@ class ShowPage extends React.Component<ShowPageProps, any> {
           <p>{ cinema ? cinema.addr : ""}</p>
         </div>
         <MovieHeader detail={movieDetail ? movieDetail.detail : {}}/>
-        <TimeLine showInfo={showInfo}/>
+        <TimeLine showInfo={showInfo} push={this.props.push} mid={mid} cid={cid}/>
       </div>
     )
   }
