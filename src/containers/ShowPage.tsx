@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { goBack, push } from 'react-router-redux';
 import { MovieHeader } from '../components/detail';
 import { TimeLine } from '../components/show';
-import { NavBar } from 'antd-mobile';
+import { NavBar, Modal } from 'antd-mobile';
 import { loadMovieDetail, loadShowInfo, loadCinemaList } from '../actions';
 
 import * as React from 'react';
@@ -23,12 +23,21 @@ export interface ShowPageProps {
 
 class ShowPage extends React.Component<ShowPageProps, any> {
 
+  state = {
+    modal: false
+  }
 
   componentDidMount() {
     this.props.loadMovieDetail(this.props.mid);
     this.props.loadCinemaList();
     this.props.loadShowInfo(this.props.mid, this.props.cid);
+    setTimeout(() => {
+      if (JSON.stringify(this.props.showInfo) === "{}") {
+        this.setState({ modal: true });
+      }
+    }, 1000);
   }
+
 
   getCinemaById(cinemaList: Array<any>, cid: number) {
     if (cinemaList.length > 0) {
@@ -42,12 +51,26 @@ class ShowPage extends React.Component<ShowPageProps, any> {
     }
   }
 
+  onClose = () => {
+    this.setState({ model: false });
+  }
+
   render() {
     const { movieDetail, showInfo, cinemaList, mid, cid } = this.props;
     const cinema = this.getCinemaById(cinemaList, cid);
     
     return (
       <div id="show-page">
+        <Modal
+          title="提示"
+          transparent
+          maskClosable={false}
+          visible={this.state.modal}
+          onClose={this.onClose}
+          footer={[{ text: '确定', onPress: () => { this.props.goBack(); this.onClose(); } }]}
+        >
+          该影院暂无该影片排场
+        </Modal>
         <NavBar iconName="left" onLeftClick={() => this.props.goBack()}>{cinema ? cinema.nm : ""}</NavBar>
         <div className="cinema-info">
           <div className="cinema-name">{ cinema ? cinema.nm : "" }</div>

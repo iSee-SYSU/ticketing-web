@@ -9,6 +9,7 @@ import '../components/seats/styles/index.sass';
 
 export interface SeatsPageProps {
   goBack: Function,
+  push: Function,
   loadMovieDetail: Function,
   loadShowInfo: Function,
   loadCinemaList: Function,
@@ -61,7 +62,7 @@ class SeatsPage extends React.Component<SeatsPageProps, any> {
   }
 
   order() {
-    if (localStorage.orders == '') {
+    if (!localStorage.orders) {
       localStorage.orders = '[]';
     }
     let orders = JSON.parse(localStorage.orders);
@@ -76,6 +77,7 @@ class SeatsPage extends React.Component<SeatsPageProps, any> {
     });
 
     localStorage.orders = JSON.stringify(orders);
+    this.props.push('/login');
   }
 
   render() {
@@ -89,7 +91,7 @@ class SeatsPage extends React.Component<SeatsPageProps, any> {
             className="btn btn-pay" 
             disabled={this.state.selectedSeats.length == 0}
             onClick={() => this.order()}>
-            提交订单
+            确认选座
           </button>
           <div className="info">
             <h3>{ movieDetail ? movieDetail.detail.nm : "" }</h3>

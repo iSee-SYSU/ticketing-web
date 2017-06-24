@@ -25,7 +25,7 @@ export default (options: reqwest.ReqwestOptions) => {
     delete options.error;
   }
 
-  options.url = config.domain + options.url;
+  options.url = options.url.indexOf('http') >= 0 ? options.url : config.domain + options.url;
 
   Toast.loading('加载中 ..', 0);
 

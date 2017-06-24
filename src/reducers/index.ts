@@ -27,10 +27,9 @@ function data(state = defaultDataState, action) {
 
     switch(action.type) {
       case actions.CHANGE_AREA:
-        const s = Object.assign({}, state, {
+        return Object.assign({}, state, {
           curArea: action.area
         });
-        return s;
     }
 
   }

@@ -30,7 +30,7 @@ export const MovieList = (props: MovieListProps) => {
         <p className='movie-content'>{item.scm}</p>
       </div>
       <p className='movie-showInfo'>{item.showInfo}</p>
-      <Button style={{ 'backgroundColor': '#45c45b' }}type="primary" inline size="small" className='buy-btn' onClick={(e) => toCinema(e, item.id)}>购票</Button>
+      <Button type="primary" inline size="small" className='buy-btn' onClick={(e) => toCinema(e, item.id)}>购票</Button>
     </div>
   ));
 

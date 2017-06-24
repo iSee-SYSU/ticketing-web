@@ -35,3 +35,9 @@ export const getSeatsInfo = (params) => {
     url: `api/seat?showId=${params.sid}&showDate=${params.sdate}`
   })
 }
+
+export const getVerification = (params) => {
+  return request({
+    url: `http://wx.kaocat.com/api/verification/${params.phone}`
+  })
+}

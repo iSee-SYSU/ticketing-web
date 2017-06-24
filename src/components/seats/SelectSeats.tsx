@@ -37,7 +37,7 @@ export const SelectSeats = (props: SelectSeatsProps) => {
         ]
       }
     ],
-    sectionName: "五号"
+    sectionName: ""
   }]
 
   const seatRows = seatsInfo.length > 0 ? seatsInfo[0].seatRows : [];
