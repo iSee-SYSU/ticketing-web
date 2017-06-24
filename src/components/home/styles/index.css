@@ -1,5 +1,6 @@
 .tk-searchbar {
   margin-bottom: 0px;
+  z-index: 0;
 }
 
 .tk-carousel {
