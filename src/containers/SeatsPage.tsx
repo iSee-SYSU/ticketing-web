@@ -25,6 +25,23 @@ export interface SeatsPageProps {
 
 class SeatsPage extends React.Component<SeatsPageProps, any> {
 
+  state = {
+    selectedSeats : [],
+  }
+
+  select(seat: any) {
+    let index = this.state.selectedSeats.indexOf(seat);
+    if (index == -1) {
+      this.setState({
+        selectedSeats: this.state.selectedSeats.push(seat)
+      });
+    } else {
+      this.setState({
+        selectedSeats: this.state.selectedSeats.splice(index, 1)
+      });
+    }
+  }
+
   componentDidMount() {
     this.props.loadMovieDetail(this.props.mid);
     this.props.loadCinemaList();
@@ -73,7 +90,7 @@ class SeatsPage extends React.Component<SeatsPageProps, any> {
             </li>
           </ul>
         </div>
-        <SelectSeats seatsInfo={seatsInfo ? seatsInfo : []}/>
+        <SelectSeats seatsInfo={seatsInfo ? seatsInfo : []} select={(seat) => this.select(seat)}/>
       </div>
     )
   }

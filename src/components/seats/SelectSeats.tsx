@@ -3,7 +3,8 @@ import request from '../../utils/request';
 import './styles/index.sass';
 
 export interface SelectSeatsProps {
-  seatsInfo: Array<any>
+  seatsInfo: Array<any>,
+  select: Function,
 }
 
 export const SelectSeats = (props: SelectSeatsProps) => {
@@ -11,14 +12,40 @@ export const SelectSeats = (props: SelectSeatsProps) => {
   const { seatsInfo } = props;
 
   const seatRows = seatsInfo.length > 0 ? seatsInfo[0].seatRows : [];
-  const seats = seatRows.map(item => {
+
+  const seats = seatRows.map((item, index) => {
     return (
-      <div key={item.rowId}>
+      <div key={index}>
         {
           item.seats.map(s => {
-            if (s.type == "N") return (<span className="seat" key={s.seatNo}></span>)
-            else if (s.type == "LK") return (<a href="javascript:void(0)" className="seat active" key={s.seatNo}></a>)
-            else return (<a href="javascript:void(0)" className="seat disabled" key={s.seatNo}></a>)
+            if (s.type == "N") {
+              return (
+                <a 
+                  href="javascript:void(0)" 
+                  className="seat active" 
+                  key={s.seatNo} 
+                  >
+                </a>
+                )
+            } 
+            else if (s.type == "LK") {
+              return (
+                <a 
+                  href="javascript:void(0)" 
+                  className="seat disabled" 
+                  key={s.seatNo} 
+                  >
+                </a>
+                )
+            } else { 
+              return (
+                <span 
+                  className="seat" 
+                  key={s.seatNo} 
+                  >
+                </span>
+                )
+            }
           })
         }
         
