@@ -67,6 +67,10 @@ export const areaList = {
   failure: (params, error) => action(AREA_LIST.FAILURE, { params, error }),
 }
 
+// 改变区域
+export const CHANGE_AREA: string = 'CHANGE_AREA';
+export const changeArea = (area) => action(CHANGE_AREA, area);
+
 // 获取全部影院信息
 export const LOAD_CINEMA_LIST: string = 'LOAD_CINEMA_LIST';
 

@@ -20,7 +20,7 @@ export const getAreaList = (params) => {
 
 export const getCinemaList = (params) => {
   return request({
-    url: `api/cinema`
+    url: `api/cinema/${params.area.id}`
   })
 }
 

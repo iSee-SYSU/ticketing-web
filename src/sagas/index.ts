@@ -63,11 +63,10 @@ function* loadAreaList() {
 function* loadCinemaList() {
   // cache
   const data = yield select(selectors.getCinemaList);
-  if (data.length <= 0) {
-    const cinemaListAction = actions.cinemaList;
-    const getCinemaList = getData.bind(null, cinemaListAction, api.getCinemaList);
-    yield call(getCinemaList, 'cinemaList');
-  }
+  const cinemaListAction = actions.cinemaList;
+  const getCinemaList = getData.bind(null, cinemaListAction, api.getCinemaList);
+  const area = yield select(selectors.getCurArea);
+  yield call(getCinemaList, 'cinemaList', { area });
 }
 
 /**

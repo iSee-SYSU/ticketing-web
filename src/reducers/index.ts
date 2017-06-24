@@ -3,12 +3,13 @@ import { combineReducers } from 'redux';
 
 const defaultDataState = {
   carouselImages: ['AiyWuByWklrrUDlFignR', 'TekJlZRVCjLFexlOCuWn'],
+  curArea: { id: 0, nm: "番禺区" },
   movieList: [],
   areaList: [],
   cinemaList: [],
   seatsInfo: [],
   showInfo: null,
-  movieDetail: null,
+  movieDetail: null
 }
 
 /**
@@ -22,6 +23,16 @@ function data(state = defaultDataState, action) {
       [action.field]: action.response.data
     });
     return s;
+  } else {
+
+    switch(action.type) {
+      case actions.CHANGE_AREA:
+        const s = Object.assign({}, state, {
+          curArea: action.area
+        });
+        return s;
+    }
+
   }
 
   return state;

@@ -21,6 +21,8 @@
     "node-sass": "^4.5.3",
     "postcss-pxtorem": "^4.0.1",
     "prop-types": "^15.5.8",
+    "rc-notification": "^2.0.0",
+    "rc-util": "^4.0.4",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.3",
