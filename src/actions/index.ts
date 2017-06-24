@@ -83,7 +83,7 @@ export const cinemaList = {
 // 获取电影排期
 export const LOAD_SHOW_INFO: string = 'LOAD_SHOW_INFO';
 
-export const loadShowInfo = (mid: number, cid:number) => action(LOAD_SHOW_INFO, {mid, cid});
+export const loadShowInfo = (mid: number, cid: number) => action(LOAD_SHOW_INFO, {mid, cid});
 
 const SHOW_INFO: RequestTypes = createRequestTypes('SHOW_INFO');
 
@@ -91,4 +91,17 @@ export const showInfo = {
   request: (params) => action(SHOW_INFO.REQUEST, {params}),
   success: (params, response, field) => action(SHOW_INFO.SUCCESS, { params, response, field }),
   failure: (params, error) => action(SHOW_INFO.FAILURE, { params, error }),
+}
+
+// 获取场次座位信息
+export const LOAD_SEATS_INFO: string = 'LOAD_SEATS_INFO';
+
+export const loadSeatsInfo = (sid: number, sdate: string) => action(LOAD_SEATS_INFO, {sid, sdate});
+
+const SEATS_INFO: RequestTypes = createRequestTypes('SEATS_INFO');
+
+export const seatsInfo = {
+  request: (params) => action(SEATS_INFO.REQUEST, {params}),
+  success: (params, response, field) => action(SEATS_INFO.SUCCESS, { params, response, field }),
+  failure: (params, error) => action(SEATS_INFO.FAILURE, { params, error }),
 }

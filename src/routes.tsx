@@ -21,7 +21,7 @@ export const App = (props: RouterProps) => {
         <Route path="/detail/:id" component={DetailPage} />
         <Route path="/movie/:movieId/cinema" component={CinemaPage} />
         <Route path="/show/movie/:movieId/cinema/:cinemaId" component={ShowPage} />
-        <Route path="/seats/:movieId/show/:showId/date/:showDate" component={SeatsPage} />
+        <Route path="/seats/movie/:movieId/cinema/:cinemaId/show/:showId/date/:showDate" component={SeatsPage} />
       </div>
     </ConnectedRouter >
   )

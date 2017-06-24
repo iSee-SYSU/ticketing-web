@@ -50,18 +50,18 @@ class HomePage extends React.Component<HomePageProps, any> {
     
     return (
       <div>
-        <NavBar iconName={null} leftContent="番禺区" onLeftClick={ this.onOpenChange }>热映</NavBar>
-        <Drawer
+        <NavBar iconName={null} >热映</NavBar>
+        {/*<Drawer
           className="my-drawer"
           style={{ minHeight: document.documentElement.clientHeight, marginTop: 90 }}
           dragHandleStyle={{ display: 'none' }}
           sidebar={sidebar}
           {...drawerProps}
-        >
-          <SearchBar className="tk-searchbar" placeholder="搜索" style={{marginBottom: 0}}/>
-          <MovieCarousel carouselImages={carouselImages}></MovieCarousel>
+        >*/}
+          {/*<SearchBar className="tk-searchbar" placeholder="搜索" style={{marginBottom: 0}}/>*/}
+          {/*<MovieCarousel carouselImages={carouselImages}></MovieCarousel>*/}
           <MovieList movies={movieList} push={push} />
-        </Drawer>
+        {/*</Drawer>*/}
         
       </div>
     )

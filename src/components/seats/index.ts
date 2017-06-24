@@ -1,4 +1,4 @@
-import SelectSeats from './SelectSeats';
+import { SelectSeats } from './SelectSeats';
 
 export {
   SelectSeats

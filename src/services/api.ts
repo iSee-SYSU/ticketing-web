@@ -29,3 +29,9 @@ export const getShowInfo = (params) => {
     url: `api/show?cinemaId=${params.cid}&movieId=${params.mid}`
   })
 }
+
+export const getSeatsInfo = (params) => {
+  return request({
+    url: `api/seat?showId=${params.sid}&showDate=${params.sdate}`
+  })
+}
