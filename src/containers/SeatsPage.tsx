@@ -60,6 +60,24 @@ class SeatsPage extends React.Component<SeatsPageProps, any> {
     }
   }
 
+  order() {
+    if (localStorage.orders == '') {
+      localStorage.orders = '[]';
+    }
+    let orders = JSON.parse(localStorage.orders);
+    orders.push({
+      seats: this.state.selectedSeats,
+      movieDetail: this.props.movieDetail,
+      showInfo: this.props.showInfo,
+      movieId: this.props.mid,
+      cinemaId: this.props.cid,
+      showId: this.props.sid,
+      showDate: this.props.sdate
+    });
+
+    localStorage.orders = JSON.stringify(orders);
+  }
+
   render() {
     const { movieDetail, showInfo, cinemaList, seatsInfo, mid, cid, sid, sdate } = this.props;
     const cinema = this.getCinemaById(cinemaList, cid);
@@ -67,7 +85,12 @@ class SeatsPage extends React.Component<SeatsPageProps, any> {
       <div id="seats-page">
         <NavBar iconName="left" onLeftClick={() => this.props.goBack()}>{ cinema ? cinema.nm : ""}</NavBar>
         <div className="movie">
-          <button className="btn btn-pay" disabled={this.state.selectedSeats.length > 0}>提交订单</button>
+          <button 
+            className="btn btn-pay" 
+            disabled={this.state.selectedSeats.length == 0}
+            onClick={() => this.order()}>
+            提交订单
+          </button>
           <div className="info">
             <h3>{ movieDetail ? movieDetail.detail.nm : "" }</h3>
             <p>{ sdate }</p>
