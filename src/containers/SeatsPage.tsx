@@ -29,14 +29,15 @@ class SeatsPage extends React.Component<SeatsPageProps, any> {
     selectedSeats : [],
   }
 
-  select(seat: any) {
-    let index = this.state.selectedSeats.indexOf(seat);
+  select(seatNo: any) {
+    let index = this.state.selectedSeats.indexOf(seatNo);
     if (index == -1) {
-      this.state.selectedSeats.push(seat)
+      this.state.selectedSeats.push(seatNo);
+      this.setState({selectedSeats: this.state.selectedSeats});
     } else {
-      this.state.selectedSeats.splice(index, 1)
+      this.state.selectedSeats.splice(index, 1);
+      this.setState({selectedSeats: this.state.selectedSeats});
     }
-    console.log(this.state.selectedSeats);
     
   }
 
@@ -66,7 +67,7 @@ class SeatsPage extends React.Component<SeatsPageProps, any> {
       <div id="seats-page">
         <NavBar iconName="left" onLeftClick={() => this.props.goBack()}>{ cinema ? cinema.nm : ""}</NavBar>
         <div className="movie">
-          <button className="btn btn-pay">提交订单</button>
+          <button className="btn btn-pay" disabled={this.state.selectedSeats.length > 0}>提交订单</button>
           <div className="info">
             <h3>{ movieDetail ? movieDetail.detail.nm : "" }</h3>
             <p>{ sdate }</p>

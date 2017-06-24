@@ -58,9 +58,9 @@ export const SelectSeats = (props: SelectSeatsProps) => {
               link = (
                 <a 
                   href="javascript:void(0)" 
-                  className={selectedSeats.indexOf(s) == -1 ? "seat active" : "seat selected" }
+                  className={selectedSeats.indexOf(s.seatNo) == -1 ? "seat active" : "seat selected" }
                   key={s.seatNo}
-                  onClick={ () => props.select(s) } >
+                  onClick={ () => props.select(s.seatNo) } >
                 </a>
                 )
             } 
