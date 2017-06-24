@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { goBack, push } from 'react-router-redux';
 import { NavBar } from 'antd-mobile';
+import { SelectSeats } from '../components/seats';
 import { loadMovieDetail, loadShowInfo, loadCinemaList, loadSeatsInfo } from '../actions';
 
 import * as React from 'react';
@@ -72,6 +73,7 @@ class SeatsPage extends React.Component<SeatsPageProps, any> {
             </li>
           </ul>
         </div>
+        <SelectSeats seatsInfo={seatsInfo ? seatsInfo : []}/>
       </div>
     )
   }
