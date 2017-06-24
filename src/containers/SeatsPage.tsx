@@ -32,21 +32,19 @@ class SeatsPage extends React.Component<SeatsPageProps, any> {
   select(seat: any) {
     let index = this.state.selectedSeats.indexOf(seat);
     if (index == -1) {
-      this.setState({
-        selectedSeats: this.state.selectedSeats.push(seat)
-      });
+      this.state.selectedSeats.push(seat)
     } else {
-      this.setState({
-        selectedSeats: this.state.selectedSeats.splice(index, 1)
-      });
+      this.state.selectedSeats.splice(index, 1)
     }
+    console.log(this.state.selectedSeats);
+    
   }
 
   componentDidMount() {
     this.props.loadMovieDetail(this.props.mid);
     this.props.loadCinemaList();
     // this.props.loadShowInfo(this.props.mid, this.props.cid);
-    this.props.loadSeatsInfo(this.props.sid, this.props.sdate);
+    // this.props.loadSeatsInfo(this.props.sid, this.props.sdate);
   }
 
   getCinemaById(cinemaList: Array<any>, cid: number) {
@@ -90,7 +88,10 @@ class SeatsPage extends React.Component<SeatsPageProps, any> {
             </li>
           </ul>
         </div>
-        <SelectSeats seatsInfo={seatsInfo ? seatsInfo : []} select={(seat) => this.select(seat)}/>
+        <SelectSeats 
+          seatsInfo={seatsInfo ? seatsInfo : []} 
+          select={(seat) => this.select(seat)}
+          selectedSeats={this.state.selectedSeats}/>
       </div>
     )
   }
